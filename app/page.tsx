@@ -7,6 +7,7 @@ import { SpendingChart } from "@/components/dashboard/spending-chart"
 import { RecentActivity } from "@/components/dashboard/recent-activity"
 import { ScrollReveal } from "@/components/ui/scroll-reveal"
 import { PhonePreview } from "@/components/dashboard/phone-preview"
+import { SummaryCards } from "@/components/dashboard/summary-cards"
 
 export default function DashboardPage() {
   return (
@@ -37,7 +38,7 @@ export default function DashboardPage() {
         {/* Phone Preview */}
         <ScrollReveal delay={0.1}>
           <div className="mt-6 sm:mt-8 flex justify-center">
-            <PhonePreview />
+            <SummaryCards />
           </div>
         </ScrollReveal>
 
