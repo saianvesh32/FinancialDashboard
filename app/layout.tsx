@@ -4,60 +4,45 @@ import { Analytics } from '@vercel/analytics/next'
 import { Navbar } from '@/components/navbar'
 import './globals.css'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
 
-const geistMono = Geist_Mono({ 
+const geistMono = Geist_Mono({
   subsets: ['latin'],
   variable: '--font-geist-mono',
 })
 
 export const metadata: Metadata = {
   title: 'FinanceFlow - Smart Finance Dashboard',
-  description: 'A modern finance dashboard to track your income, expenses, and financial insights.',
+  description:
+    'A modern finance dashboard to track your income, expenses, and financial insights.',
   generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8f7ff' },
-    { media: '(prefers-color-scheme: dark)', color: '#1a1625' },
-  ],
   width: 'device-width',
   initialScale: 1,
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${geistMono.variable} font-sans antialiased relative`}>
+      <body
+        className={`${inter.variable} ${geistMono.variable} font-sans antialiased`}
+      >
         <Navbar />
-        <main className="relative min-h-screen pt-16">
+
+        {/* ✅ Responsive Main Wrapper */}
+        <main className="min-h-screen pt-16 px-3 sm:px-6 lg:px-8 overflow-x-hidden">
           {children}
         </main>
+
         <Analytics />
       </body>
     </html>

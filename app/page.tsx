@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { HeroSection } from "@/components/dashboard/hero-section"
-import { SummaryCards } from "@/components/dashboard/summary-cards"
 import { BalanceChart } from "@/components/dashboard/balance-chart"
 import { SpendingChart } from "@/components/dashboard/spending-chart"
 import { RecentActivity } from "@/components/dashboard/recent-activity"
@@ -12,35 +11,42 @@ import { PhonePreview } from "@/components/dashboard/phone-preview"
 export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+
+      {/* ✅ Container */}
+      <div className="mx-auto w-full max-w-7xl">
+
         {/* Hero Section */}
         <HeroSection />
 
-        {/* Section Header */}
+        {/* Header */}
         <ScrollReveal>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
+            className="mt-6 sm:mt-8"
           >
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-balance">
+            <h2 className="text-lg sm:text-2xl font-bold tracking-tight">
               Financial Overview
             </h2>
-            <p className="text-muted-foreground mt-1">
-              {"Track your income, expenses, and balance at a glance"}
+            <p className="text-muted-foreground mt-1 text-sm sm:text-base">
+              Track your income, expenses, and balance at a glance
             </p>
           </motion.div>
         </ScrollReveal>
 
-        {/* Summary Cards */}
-        <ScrollReveal delay={0.1} >
-          <PhonePreview />
+        {/* Phone Preview */}
+        <ScrollReveal delay={0.1}>
+          <div className="mt-6 sm:mt-8 flex justify-center">
+            <PhonePreview />
+          </div>
         </ScrollReveal>
 
-        {/* Charts Grid */}
-        <div className="grid gap-6 lg:grid-cols-2 mt-8">
+        {/* Charts Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-8">
           <ScrollReveal delay={0.2}>
             <BalanceChart />
           </ScrollReveal>
+
           <ScrollReveal delay={0.3}>
             <SpendingChart />
           </ScrollReveal>
@@ -48,8 +54,11 @@ export default function DashboardPage() {
 
         {/* Recent Activity */}
         <ScrollReveal delay={0.4}>
-          <RecentActivity />
+          <div className="mt-8">
+            <RecentActivity />
+          </div>
         </ScrollReveal>
+
       </div>
     </div>
   )
