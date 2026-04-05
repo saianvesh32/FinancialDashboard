@@ -1,4 +1,3 @@
-
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
@@ -40,7 +39,11 @@ export function HeroSection() {
     <motion.div
       ref={ref}
       style={{ opacity, scale }}
-      className="relative overflow-hidden rounded-3xl border border-border/50 mb-8 bg-gradient-to-br from-white via-blue-50/40 to-indigo-100/30 backdrop-blur"
+      className="relative overflow-hidden rounded-3xl border border-border/50 mb-8 
+      bg-gradient-to-br 
+      from-white via-blue-50/40 to-indigo-100/30 
+      dark:from-slate-900 dark:via-slate-800 dark:to-slate-900
+      backdrop-blur"
     >
       {/* Background */}
       <img
@@ -53,35 +56,53 @@ export function HeroSection() {
 
           {/* LEFT CONTENT */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 text-blue-600 text-sm">
+
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full 
+              bg-blue-100 text-blue-700 
+              dark:bg-blue-900/40 dark:text-blue-300 text-sm">
               <Sparkles className="h-4 w-4" />
               Your Financial Command Center
             </div>
 
+            {/* Heading */}
             <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
-              <span className="text-gray-900">Take Control of</span>
+              <span className="text-gray-900 dark:text-white">
+                Take Control of
+              </span>
               <br />
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-500 
+                dark:from-blue-400 dark:to-indigo-300
+                bg-clip-text text-transparent">
                 Your Finances
               </span>
             </h1>
 
-            <p className="text-gray-600 max-w-md text-lg">
+            {/* Description */}
+            <p className="text-gray-600 dark:text-gray-300 max-w-md text-lg">
               Track spending, analyze trends, and make smarter financial decisions.
             </p>
 
+            {/* Buttons */}
             <div className="flex gap-4">
               <Button className="bg-blue-600 hover:bg-blue-700 text-white">
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline">View Demo</Button>
+
+              <Button
+                variant="outline"
+                className="dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-800"
+              >
+                View Demo
+              </Button>
             </div>
 
+            {/* Features */}
             <div className="flex gap-6 flex-wrap">
               {features.map((f, i) => (
-                <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                  <div className="p-1.5 bg-blue-100 rounded-lg">
-                    <f.icon className="h-4 w-4 text-blue-600" />
+                <div key={i} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                  <div className="p-1.5 bg-blue-100 dark:bg-blue-900/40 rounded-lg">
+                    <f.icon className="h-4 w-4 text-blue-600 dark:text-blue-300" />
                   </div>
                   {f.label}
                 </div>
@@ -92,9 +113,9 @@ export function HeroSection() {
           {/* RIGHT IMAGE STACK */}
           <div className="relative h-[480px] flex items-center justify-center">
 
-            {/* BACK IMAGE (bottom-right) */}
+            {/* BACK IMAGE */}
             <motion.img
-              src="/images/dashboard-back.png"
+              src="/images/dashboard1.png"
               onClick={() => setActive("back")}
               animate={{
                 scale: active === "back" ? 1 : 0.85,
@@ -105,13 +126,13 @@ export function HeroSection() {
                 filter: active === "back" ? "blur(0px)" : "blur(2px)",
               }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="absolute w-[500px] rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.35)] cursor-pointer"
+              className="absolute w-[700px] rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.5)] cursor-pointer"
               style={{ y }}
             />
 
-            {/* FRONT IMAGE (top-left) */}
+            {/* FRONT IMAGE */}
             <motion.img
-              src="/images/dashboard-front.png"
+              src="/images/dashboard2.png"
               onClick={() => setActive("front")}
               animate={{
                 scale: active === "front" ? 1 : 0.85,
@@ -122,11 +143,11 @@ export function HeroSection() {
                 filter: active === "front" ? "blur(0px)" : "blur(2px)",
               }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="absolute w-[500px] rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.35)] cursor-pointer"
+              className="absolute w-[700px] rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.5)] cursor-pointer"
               style={{ y }}
             />
 
-            {/* Floating Profit */}
+            {/* Profit */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
@@ -139,7 +160,10 @@ export function HeroSection() {
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity }}
-              className="absolute bottom-0 bg-white px-4 py-2 rounded-xl shadow-lg border"
+              className="absolute bottom-0 
+              bg-white dark:bg-slate-800 
+              text-gray-800 dark:text-gray-200
+              px-4 py-2 rounded-xl shadow-lg border dark:border-gray-700"
             >
               Saved: {formatCurrency(totalBalance)}
             </motion.div>

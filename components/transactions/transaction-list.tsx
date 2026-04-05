@@ -340,10 +340,10 @@ export function TransactionList() {
                       {format(new Date(transaction.date), "MMM d, yyyy")}
                     </div>
 
-                    <div className="flex items-center gap-1">
-                      {isIncome ? (
-                        <ArrowUpRight className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                      ) : (
+                  <div className="flex items-center gap-1">
+                    {isIncome ? (
+                      <ArrowUpRight className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                    ) : (
                         <ArrowDownRight className="h-4 w-4 text-rose-600 dark:text-rose-400" />
                       )}
                       <span

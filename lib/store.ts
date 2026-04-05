@@ -53,34 +53,33 @@ interface FinanceState {
 
 const generateId = () => Math.random().toString(36).substring(2, 9)
 
-// Mock transactions data
+// ✅ UPDATED DATA (Oct → Mar)
 const mockTransactions: Transaction[] = [
+  // March
+  { id: generateId(), date: "2024-03-15", description: "Monthly Salary", category: "Salary", amount: 5500, type: "income" },
+  { id: generateId(), date: "2024-03-10", description: "Shopping", category: "Shopping", amount: 300, type: "expense" },
+
+  // February
+  { id: generateId(), date: "2024-02-15", description: "Monthly Salary", category: "Salary", amount: 5500, type: "income" },
+  { id: generateId(), date: "2024-02-11", description: "Dining Out", category: "Food & Dining", amount: 120, type: "expense" },
+
+  // January
   { id: generateId(), date: "2024-01-15", description: "Monthly Salary", category: "Salary", amount: 5500, type: "income" },
   { id: generateId(), date: "2024-01-14", description: "Grocery Shopping", category: "Food & Dining", amount: 156.50, type: "expense" },
   { id: generateId(), date: "2024-01-13", description: "Freelance Project", category: "Freelance", amount: 1200, type: "income" },
-  { id: generateId(), date: "2024-01-12", description: "Electric Bill", category: "Bills & Utilities", amount: 89.99, type: "expense" },
-  { id: generateId(), date: "2024-01-11", description: "Netflix Subscription", category: "Entertainment", amount: 15.99, type: "expense" },
-  { id: generateId(), date: "2024-01-10", description: "Gas Station", category: "Transportation", amount: 45.00, type: "expense" },
-  { id: generateId(), date: "2024-01-09", description: "Restaurant Dinner", category: "Food & Dining", amount: 78.50, type: "expense" },
-  { id: generateId(), date: "2024-01-08", description: "Stock Dividends", category: "Investment", amount: 320, type: "income" },
-  { id: generateId(), date: "2024-01-07", description: "Online Shopping", category: "Shopping", amount: 234.99, type: "expense" },
-  { id: generateId(), date: "2024-01-06", description: "Uber Rides", category: "Transportation", amount: 32.50, type: "expense" },
-  { id: generateId(), date: "2024-01-05", description: "Doctor Visit", category: "Healthcare", amount: 150, type: "expense" },
-  { id: generateId(), date: "2024-01-04", description: "Internet Bill", category: "Bills & Utilities", amount: 59.99, type: "expense" },
-  { id: generateId(), date: "2024-01-03", description: "Coffee Shop", category: "Food & Dining", amount: 12.50, type: "expense" },
-  { id: generateId(), date: "2024-01-02", description: "Weekend Trip", category: "Travel", amount: 450, type: "expense" },
-  { id: generateId(), date: "2024-01-01", description: "New Year Bonus", category: "Salary", amount: 2000, type: "income" },
-  { id: generateId(), date: "2023-12-28", description: "Gym Membership", category: "Healthcare", amount: 49.99, type: "expense" },
-  { id: generateId(), date: "2023-12-25", description: "Christmas Shopping", category: "Shopping", amount: 389.99, type: "expense" },
+
+  // December
   { id: generateId(), date: "2023-12-20", description: "Consulting Fee", category: "Freelance", amount: 800, type: "income" },
   { id: generateId(), date: "2023-12-15", description: "Monthly Salary", category: "Salary", amount: 5500, type: "income" },
   { id: generateId(), date: "2023-12-10", description: "Phone Bill", category: "Bills & Utilities", amount: 75, type: "expense" },
+
+  // November
   { id: generateId(), date: "2023-11-15", description: "Monthly Salary", category: "Salary", amount: 5500, type: "income" },
   { id: generateId(), date: "2023-11-10", description: "Concert Tickets", category: "Entertainment", amount: 120, type: "expense" },
+
+  // October
   { id: generateId(), date: "2023-10-15", description: "Monthly Salary", category: "Salary", amount: 5500, type: "income" },
   { id: generateId(), date: "2023-10-05", description: "Car Maintenance", category: "Transportation", amount: 280, type: "expense" },
-  { id: generateId(), date: "2023-09-15", description: "Monthly Salary", category: "Salary", amount: 5500, type: "income" },
-  { id: generateId(), date: "2023-08-15", description: "Monthly Salary", category: "Salary", amount: 5500, type: "income" },
 ]
 
 export const useFinanceStore = create<FinanceState>()(
@@ -124,7 +123,7 @@ export const useFinanceStore = create<FinanceState>()(
   )
 )
 
-// Computed selectors
+// ✅ FILTERED
 export const useFilteredTransactions = () => {
   const { transactions, searchQuery, categoryFilter, typeFilter, sortBy, sortOrder } = useFinanceStore()
   
@@ -147,6 +146,7 @@ export const useFilteredTransactions = () => {
     })
 }
 
+// ✅ STATS
 export const useFinanceStats = () => {
   const { transactions } = useFinanceStore()
   
@@ -163,10 +163,11 @@ export const useFinanceStats = () => {
   return { totalIncome, totalExpenses, totalBalance }
 }
 
+// ✅ FIXED MONTHS (IMPORTANT)
 export const useMonthlyData = () => {
   const { transactions } = useFinanceStore()
   
-  const months = ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan"]
+  const months = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"]
   const monthMap: Record<string, { income: number; expense: number; balance: number }> = {}
   
   months.forEach(month => {
@@ -175,7 +176,7 @@ export const useMonthlyData = () => {
   
   transactions.forEach((t) => {
     const date = new Date(t.date)
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     const month = monthNames[date.getMonth()]
     
     if (monthMap[month]) {
@@ -194,6 +195,7 @@ export const useMonthlyData = () => {
   }))
 }
 
+// ✅ CATEGORY DATA
 export const useCategoryData = () => {
   const { transactions } = useFinanceStore()
   

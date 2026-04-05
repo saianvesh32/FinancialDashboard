@@ -40,18 +40,17 @@ export function BalanceChart() {
   })
 
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-      <Card className="border-0 shadow-lg">
+    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="h-full">
+      <Card className="border-0 shadow-lg h-full flex flex-col">
         <CardHeader>
           <CardTitle>Balance Trend</CardTitle>
           <CardDescription>Income vs Expense vs Balance</CardDescription>
         </CardHeader>
 
-        <CardContent>
-          <div className="h-[300px]">
+        <CardContent className="flex-1">
+          <div className="h-[320px] w-full">
             <ResponsiveContainer>
               <AreaChart data={chartData}>
-                {/* Gradients */}
                 <defs>
                   <linearGradient id="balance" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.4} />
@@ -70,17 +69,12 @@ export function BalanceChart() {
                 </defs>
 
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
-
                 <XAxis dataKey="month" />
                 <YAxis />
 
-                <Tooltip
-                  formatter={(value: number) => formatCurrency(value)}
-                />
-
+                <Tooltip formatter={(value: number) => formatCurrency(value)} />
                 <Legend />
 
-                {/* Balance */}
                 <Area
                   type="monotone"
                   dataKey="balance"
@@ -89,7 +83,6 @@ export function BalanceChart() {
                   strokeWidth={3}
                 />
 
-                {/* Income */}
                 <Area
                   type="monotone"
                   dataKey="income"
@@ -98,7 +91,6 @@ export function BalanceChart() {
                   strokeWidth={2}
                 />
 
-                {/* Expense */}
                 <Area
                   type="monotone"
                   dataKey="expense"
