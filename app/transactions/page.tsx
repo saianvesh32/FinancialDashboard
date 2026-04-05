@@ -16,8 +16,10 @@ export default function TransactionsPage() {
       label: "Total Transactions",
       value: filteredTransactions.length.toString(),
       icon: Receipt,
-      color: "text-primary",
-      bg: "bg-primary/10",
+      gradient:
+        "bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-900",
+      iconBg: "bg-indigo-500/20",
+      iconColor: "text-indigo-300",
     },
     {
       label: "Balance",
@@ -27,8 +29,10 @@ export default function TransactionsPage() {
         minimumFractionDigits: 0,
       }).format(totalBalance),
       icon: Wallet,
-      color: "text-indigo-600 dark:text-indigo-400",
-      bg: "bg-indigo-500/10",
+      gradient:
+        "bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900",
+      iconBg: "bg-blue-500/20",
+      iconColor: "text-blue-300",
     },
     {
       label: "Income",
@@ -38,8 +42,10 @@ export default function TransactionsPage() {
         minimumFractionDigits: 0,
       }).format(totalIncome),
       icon: TrendingUp,
-      color: "text-emerald-600 dark:text-emerald-400",
-      bg: "bg-emerald-500/10",
+      gradient:
+        "bg-gradient-to-br from-emerald-900 via-teal-800 to-emerald-900",
+      iconBg: "bg-emerald-400/20",
+      iconColor: "text-emerald-300",
     },
     {
       label: "Expenses",
@@ -49,14 +55,17 @@ export default function TransactionsPage() {
         minimumFractionDigits: 0,
       }).format(totalExpenses),
       icon: TrendingDown,
-      color: "text-rose-600 dark:text-rose-400",
-      bg: "bg-rose-500/10",
+      gradient:
+        "bg-gradient-to-br from-purple-900 via-rose-900 to-purple-900",
+      iconBg: "bg-rose-400/20",
+      iconColor: "text-rose-300",
     },
   ]
 
   return (
     <div className="min-h-screen bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -65,7 +74,7 @@ export default function TransactionsPage() {
         >
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-balance">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
                 Transactions
               </h1>
               <p className="text-muted-foreground mt-1">
@@ -77,24 +86,37 @@ export default function TransactionsPage() {
           </div>
         </motion.div>
 
-        {/* Quick Stats */}
+        {/* 🔥 PREMIUM STATS CARDS */}
         <ScrollReveal className="mb-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-                className="flex items-center gap-3 p-4 rounded-xl bg-card border border-border/50 shadow-sm"
+                whileHover={{ scale: 1.03 }}
+                className={`relative p-5 rounded-2xl text-white shadow-xl ${stat.gradient}`}
               >
-                <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${stat.bg}`}>
-                  <stat.icon className={`h-5 w-5 ${stat.color}`} />
-                </div>
-                <div>
-                  <p className="text-xs text-muted-foreground">{stat.label}</p>
-                  <p className="text-lg font-semibold">{stat.value}</p>
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-2xl bg-white/5 backdrop-blur-xl" />
+
+                <div className="relative flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-white/70">{stat.label}</p>
+                    <p className="text-2xl font-bold mt-1">{stat.value}</p>
+
+                    {/* Optional growth text */}
+                    <p className="text-xs mt-1 text-emerald-300">
+                      ↑ +8.2%
+                    </p>
+                  </div>
+
+                  <div
+                    className={`h-10 w-10 flex items-center justify-center rounded-xl ${stat.iconBg}`}
+                  >
+                    <stat.icon className={`h-5 w-5 ${stat.iconColor}`} />
+                  </div>
                 </div>
               </motion.div>
             ))}
